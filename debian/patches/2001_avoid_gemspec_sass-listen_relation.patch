@@ -1,0 +1,52 @@
+From: Jonas Smedegaard <dr@jones.dk>
+Date: Sat, 16 Sep 2017 13:53:43 +0200
+Subject: Avoid dependency on sass-listen
+
+Add patch to avoid gemspec dependency on sass-listen: Needed only for --watch
+option, and library is not in Debian.
+
+Edit: Replace sass-listen by listen.
+
+Bug-Debian: https://bugs.debian.org/875897
+Reviewed-By: Daniel Leidert <dleidert@debian.org>
+---
+ lib/sass/plugin/compiler.rb | 10 ++++++++--
+ sass.gemspec                |  4 ++--
+ 2 files changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/lib/sass/plugin/compiler.rb b/lib/sass/plugin/compiler.rb
+index f3ae6e3..f5d81c2 100644
+--- a/lib/sass/plugin/compiler.rb
++++ b/lib/sass/plugin/compiler.rb
+@@ -377,8 +377,14 @@ module Sass::Plugin
+ 
+     # This is mocked out in compiler_test.rb.
+     def create_listener(*args, &block)
+-      require 'sass-listen'
+-      SassListen.to(*args, &block)
++      begin
++        require 'listen'
++      rescue LoadError
++        puts "Unable to load listen gem. Please install it e.g. with the following command:"
++        puts "  apt install ruby-listen"
++        exit 1
++      end
++      Listen.to(*args, &block)
+     end
+ 
+     def remove_redundant_directories(directories)
+diff --git a/sass.gemspec b/sass.gemspec
+index 844de7f..034a23a 100644
+--- a/sass.gemspec
++++ b/sass.gemspec
+@@ -21,8 +21,8 @@ SASS_GEMSPEC = Gem::Specification.new do |spec|
+     END
+ 
+   spec.required_ruby_version = '>= 2.0.0'
+-
+-  spec.add_runtime_dependency 'sass-listen', '~> 4.0.0'
++  # sass-listen not in Debian
++  spec.add_runtime_dependency 'listen', '~> 3.0'
+ 
+   spec.add_development_dependency 'yard', '~> 0.8.7.6'
+   spec.add_development_dependency 'redcarpet', '~> 3.3'

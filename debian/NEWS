@@ -1,0 +1,27 @@
+ruby-sass (3.4.16-1) unstable; urgency=medium
+
+  * When using `--stdin` with the `sass` or `scss` executables,
+    importing relative to the working directory is deprecated.  Having
+    the working directory on the load path was deprecated in 3.3 and
+    removed in 3.4, but due to an oversight the deprecation process
+    never happened for files read over standard input in particular.
+    This is the first step of that process.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 11 Jul 2015 23:11:06 +0200
+
+ruby-sass (3.3.6-1) experimental; urgency=medium
+
+  * 3.3.0 introduced a range of backwards incompatibilities.
+    Please read /usr/share/doc/ruby-sass/changelog.gz for the details.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 01 May 2014 19:55:48 +0200
+
+ruby-sass (3.2.2-1) experimental; urgency=low
+
+  * Sass will now print a warning when it encounters a single @import
+    statement that tries to import more than one file. For example, if
+    you have @import "screen" and both screen.scss and _screen.scss
+    exist, a warning will be printed. This will become an error in
+    future versions of Sass.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 04 Nov 2012 16:14:49 +0100

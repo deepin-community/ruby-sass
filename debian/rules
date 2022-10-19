@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+export GEM2DEB_TEST_RUNNER = --check-dependencies
+export DH_RUBY = --gem-install
+
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@ --buildsystem=ruby --with ruby
+
+# generate manpage based on --help option of executable
+_mkman = RUBYLIB=lib \
+ help2man $(if $3,--name "$(strip $3)") --no-info --output $2 $1 \
+ || { RUBYLIB=lib $1 --help; false; }
+
+override_dh_auto_build:
+	echo $(DEB_VERSION_UPSTREAM) > VERSION
+	dh_auto_build
+	$(call _mkman,build/sassc,debian/sassc.1, \
+		Sass compiles CSS from SASS or SCSS files)
+
+override_dh_auto_build:
+	dh_auto_build
+	cp -t lib/sass VERSION VERSION_NAME
+	chmod +x bin/sass bin/sass-convert bin/scss
+	$(call _mkman,bin/sass,debian/sass.1, \
+		Sass compiles CSS from SASS files)
+	$(call _mkman,bin/sass-convert,debian/sass-convert.1, \
+		sass-convert converts files between CSS, SASS, and SCSS)
+	$(call _mkman,bin/scss,debian/scss.1, \
+		Scss compiles CSS from SCSS (Sassy CSS) files)
+
+override_dh_installchangelogs:
+	dh_installchangelogs doc-src/SASS_CHANGELOG.md

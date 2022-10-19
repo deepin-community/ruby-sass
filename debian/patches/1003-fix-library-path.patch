@@ -1,0 +1,65 @@
+From: Antonio Ospite <ospite@studenti.unina.it>
+Date: Sun, 24 Jul 2011 15:32:18 +0200
+Subject: Fix linkage to system-shared Sass library
+
+Acked-By: Jonas Smedegaard <dr@jones.dk>
+Bug-Debian: https://bugs.debian.org/635258
+---
+ bin/sass         | 7 +------
+ bin/sass-convert | 7 +------
+ bin/scss         | 7 +------
+ 3 files changed, 3 insertions(+), 18 deletions(-)
+
+diff --git a/bin/sass b/bin/sass
+index 62d6d0c..592b7a3 100755
+--- a/bin/sass
++++ b/bin/sass
+@@ -1,12 +1,7 @@
+ #!/usr/bin/env ruby
+ # The command line Sass parser.
+ 
+-THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+-begin
+-  require File.dirname(THIS_FILE) + '/../lib/sass'
+-rescue LoadError
+-  require 'sass'
+-end
++require 'sass'
+ require 'sass/exec'
+ 
+ opts = Sass::Exec::SassScss.new(ARGV, :sass)
+diff --git a/bin/sass-convert b/bin/sass-convert
+index b276253..4cdb3ad 100755
+--- a/bin/sass-convert
++++ b/bin/sass-convert
+@@ -1,11 +1,6 @@
+ #!/usr/bin/env ruby
+ 
+-THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+-begin
+-  require File.dirname(THIS_FILE) + '/../lib/sass'
+-rescue LoadError
+-  require 'sass'
+-end
++require 'sass'
+ require 'sass/exec'
+ 
+ opts = Sass::Exec::SassConvert.new(ARGV)
+diff --git a/bin/scss b/bin/scss
+index ce3c4ad..934bd2b 100755
+--- a/bin/scss
++++ b/bin/scss
+@@ -1,12 +1,7 @@
+ #!/usr/bin/env ruby
+ # The command line Sass parser.
+ 
+-THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+-begin
+-  require File.dirname(THIS_FILE) + '/../lib/sass'
+-rescue LoadError
+-  require 'sass'
+-end
++require 'sass'
+ require 'sass/exec'
+ 
+ opts = Sass::Exec::SassScss.new(ARGV, :scss)

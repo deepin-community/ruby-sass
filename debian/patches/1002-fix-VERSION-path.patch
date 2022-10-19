@@ -1,0 +1,19 @@
+From: Jonas Smedegaard <dr@jones.dk>
+Date: Sun, 3 Jul 2011 16:04:03 +0200
+Subject: Use correct path to VERSION
+
+---
+ lib/sass/root.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/sass/root.rb b/lib/sass/root.rb
+index 31e19c5..cc2c7d1 100644
+--- a/lib/sass/root.rb
++++ b/lib/sass/root.rb
+@@ -3,5 +3,5 @@ module Sass
+   # This may be overridden by the package manager
+   # if the lib directory is separated from the main source tree.
+   # @api public
+-  ROOT_DIR = File.expand_path(File.join(__FILE__, "../../.."))
++  ROOT_DIR = File.expand_path(File.join(__FILE__, ".."))
+ end

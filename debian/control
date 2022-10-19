@@ -1,0 +1,34 @@
+Source: ruby-sass
+Section: oldlibs
+Priority: optional
+Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Daniel Leidert <dleidert@debian.org>
+Build-Depends: debhelper-compat (= 13),
+               gem2deb,
+               help2man,
+               ruby-listen
+Standards-Version: 4.6.0
+Homepage: https://sass-lang.com/
+Vcs-Git: https://salsa.debian.org/sass-team/ruby-sass.git
+Vcs-Browser: https://salsa.debian.org/sass-team/ruby-sass
+Testsuite: autopkgtest-pkg-ruby
+XS-Ruby-Versions: all
+Rules-Requires-Root: no
+
+Package: ruby-sass
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${misc:Depends},
+         ${ruby:Depends},
+         ${shlibs:Depends}
+Provides: sass
+Breaks: ruby-sass-rails (<< 5~)
+Description: deprecated CSS compiler - use sassc or ruby-sassc instead
+ Sass makes CSS fun again. Sass is an extension of CSS3, adding nested
+ rules, variables, mixins, selector inheritance, and more.
+ .
+ It's translated to well-formatted, standard CSS using the command line
+ tool or a web-framework plugin.
+ .
+ Ruby Sass should no longer be used and will no longer be receiving any
+ active development. Please use sassc or ruby-sassc instead.

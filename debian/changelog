@@ -1,0 +1,854 @@
+ruby-sass (3.7.4-5) unstable; urgency=medium
+
+  * d/control: Remove any reference to ruby-compass (removed from Debian).
+  * d/patches/1001-avoid-rubygems.patch: Adjust patch.
+    - Adjust message to install compass gem.
+
+ -- Daniel Leidert <dleidert@debian.org>  Sat, 06 Nov 2021 21:37:00 +0100
+
+ruby-sass (3.7.4-4) unstable; urgency=medium
+
+  * d/control: Add Testsuite and Rules-Requires-Root fields.
+    (Maintainer, Uploaders): Move package into Ruby team. Thanks to
+    Jonas Smedegaard for the previous work.
+    (Build-Depends): Raise to dh 13.
+    (Standards-Version): Bump to 4.6.0.
+    (Depends): Use ${ruby:Depends}.
+    (Suggests): Remove ruby-sass-listen (doesn't exist). Re-add ruby-compass.
+    (Description): Minor wording improvement.
+  * d/copyright: Update file and add team.
+  * d/copyright-check: Drop unused file.
+  * d/copyright_hints: Ditto.
+  * d/install: Ditto.
+  * d/patches/2001_avoid_gemspec_sass-listen_relation.patch: Update patch.
+    - Replace sass-listen by listen (closes: #953048).
+  * d/patches/3001-skip-some-tests.patch: Add patch.
+    - Fix a few tests.
+  * d/patches/series: Enable new patch.
+  * d/ruby-tests.rake: Add file and run tests.
+  * d/rules: Use gem installation layout and check dependencies. Include
+    /usr/share/dpkg/pkg-info.mk.
+  * d/source/lintian-overrides: Remove unused file.
+  * d/upstream/metadata: Add upstream metadata.
+  * d/watch: Update and fix file.
+
+ -- Daniel Leidert <dleidert@debian.org>  Sat, 06 Nov 2021 21:03:35 +0100
+
+ruby-sass (3.7.4-3) unstable; urgency=medium
+
+  * fix pass buildsystem via DH_OPTIONS,
+    to ensure it reaches also overridden targets
+  * generalize generating manpage, and improve short descriptions
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 09 Jun 2020 19:13:48 +0200
+
+ruby-sass (3.7.4-2) unstable; urgency=medium
+
+  * use debhelper compatibility level 12 (not 9);
+    build-depend on debhelper-compat (not debhelper)
+  * watch:
+    + shorten regexes
+    + rewrite usage comment
+  * depend on ruby:any (not ruby);
+    closes: bug#955520,
+    thanks to Steve Langasek and Gianfranco Costamagna
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 09 Jun 2020 17:26:32 +0200
+
+ruby-sass (3.7.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+    + This project has been declared end-of-life!
+
+  [ Jonas Smedegaard ]
+  * Fix and update upstream source URLs.
+  * Set section to oldlibs,
+    and promote sassc as replacement in short and long description.
+  * Unfuzz patch 2001.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 08 Jul 2019 00:29:27 -0300
+
+ruby-sass (3.5.6-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Drop obsolete README.source.
+  * Update Vcs-* fields: Maintenance moved to Salsa.
+  * Update watch file: Fix typo in usage comment.
+  * Declare compliance with Debian Policy 4.3.0.
+  * Use https protocol in Homepage URL.
+  * Update copyright info:
+    + Fix use https protocol in Upstream-Contact URL.
+    + Extend coverage of packaging.
+  * Unfuzz patch 2001.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 24 Dec 2018 17:49:13 +0100
+
+ruby-sass (3.5.3-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Use shortform dh sequencer (not cdbs).
+    Stop build-depend on cdbs.
+  * Stop build-depend on dh-buildinfo.
+  * Tidy control file, with wrap-and-sort option asbt.
+  * Declare compliance with Debian Policy 4.1.1.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 28 Oct 2017 19:27:29 +0200
+
+ruby-sass (3.5.1-2) unstable; urgency=medium
+
+  * Fix suggest ruby-sass-listen (not recommend ruby-listen).
+  * Add patch to avoid gemspec dependency on sass-listen: Needed only
+    for --watch option, and library is not in Debian.
+    Closes: Bug#875897. Thanks to Sruthi Chandran.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 16 Sep 2017 14:12:31 +0200
+
+ruby-sass (3.5.1-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Declare compliance with Debian Policy 4.1.0.
+  * Update copyright info:
+    + Use https protocol in file format URL.
+    + Drop superfluous copyright signs.
+  * Update watch file: Use substitution strings.
+  * Relax cleanup of Ruby, to limit build-depencies sloppily needed
+    outside a build chroot.
+  * Tighten lintian overrides regarding License-Reference.
+  * Advertise DEP-3 format in patch headers.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 11 Sep 2017 19:25:26 +0200
+
+ruby-sass (3.4.24-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Elements without a namespace (such as div) are no longer unified
+      with elements with the empty namespace (such as |div).
+
+  [ Jonas Smedegaard ]
+  * Modernize cdbs:
+    + Do copyright-check in maintainer script (not during build).
+    + Stop build-depend on license-check.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 21 May 2017 10:00:15 +0200
+
+ruby-sass (3.4.23-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Instantiate Sass logger per-thread/per-fiber, configurable to
+      output to any IO object.
+    + Setting numeric precision is now thread safe.
+    + Support world and group writable cache files.
+    + Permit bare declarations in supports(...) clause within @import.
+    + Fix str-slice() going to end of string even if $end-at set.
+    + Fix dpi, dpcm, and dppx unit conversions.
+    + Support url() containing quoted strings within unknown directives.
+
+  [ Jonas Smedegaard ]
+  * Update watch file: Use substitution string @PACKAGE@.
+  * Modernize Vcs-* fields:
+    + Use git subdir (not cgit) for Vcs-Browser URL.
+    + Add .git suffix for Vcs-Git URL.
+  * Stop override lintian for
+    package-needs-versioned-debhelper-build-depends: Fixed in lintian.
+  * Update copyright info:
+    + Add tracking of sass-spec-ref.sh (Expat license).
+    + Extend coverage of Debian packaging.
+  * Modernize CDBS use: Build-depend on licensecheck (not devscripts).
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 22 Jan 2017 13:15:14 +0100
+
+ruby-sass (3.4.22-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Runs without warnings with ruby code style warnings enabled.
+    + Watches current dir only when on load path or files being compiled
+      are in current dir.
+    + Add -q/--quiet option for sass-convert.
+    + Fix sass-convert crashing bug recursively converting CSS to Sass.
+    + Deprecate Ruby 1.8.7 and 1.9.3.
+    + Deprecate current CSS variables handling.
+
+  [ Jonas Smedegaard ]
+  * Update watch file:
+    + Modernize to use format 4.
+    + Add usage hint comment.
+  * Drop CDBS get-orig-source target: Use "gbp import-orig --uscan"
+    instead.
+  * Tighten git-buildpackage config: filter any upstream .git* file.
+  * Update copyright info:
+    + Extend coverage for main upstream authors.
+    + Extend coverage of packaging.
+  * Modernize Vcs-Browser field: Use https protocol.
+  * Declare compliance with Debian Policy 3.9.8.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 09 Apr 2016 13:53:14 +0200
+
+ruby-sass (3.4.21-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Consistent output formatting for numbers close to an integer.
+    + Correctly round negative numbers that were almost but not quite a
+      whole number (slightly greater than the negative number).
+    + Don't strip escaped semicolons from compressed output.
+    + Only compress around dashes within nth selectors.
+    + Selector compression of whitespace around commas was affecting
+      attribute values.
+    + Make subtraction work when a unit is followed directly by a hyphen
+      and then a period.  For example, `1em-.75em` now returns `0.25em`
+      rather than `1em -0.75em`.  This is consistent with the behavior
+      when the subtrahend begins with a `0`.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 25 Jan 2016 18:21:07 +0530
+
+ruby-sass (3.4.20-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Fix bug with rounding changes from 3.4.14 and 3.4.15 where some
+      negative numbers would incorrectly be rounded up instead of down.
+    + Better compression for `:nth` pseudoselectors with subtraction.
+    + Add support for new supports() clause for CSS @import directives.
+    + Rounding numbers now respects Sass's precision setting for numbers
+      very close to half an integer.
+    + Add support for q unit, representing one quarter of a millimeter.
+    + Mitigate race condition when multiple threads are using same
+      Sass::Plugin object at once.
+    + In compressed mode, numbers between -1 and 1 now omit leading 0.
+    + Source maps now include source ranges for comments.
+    Deprecation
+    + Certain ways of using #{} without quotes in property and variable
+      values have been deprecated in order to simplify the feature.
+      Read upstream changelog for more details.
+
+  [ Jonas Smedegaard ]
+  * Unfuzz patch 1001.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 14 Dec 2015 00:00:30 +0545
+
+ruby-sass (3.4.19-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+    + Fix too aggressive semi-colon stripping in 3.4.17.
+    + Improved numeric equality.
+    + Allow importing relative paths on implicitly set standard input.
+    + Fix edge cases with `sass-convert` and string interpolation.
+
+  [ Jonas Smedegaard ]
+  * Bump debhelper compatibility level to 9.
+  * Fix lintian overrides.
+  * Add lintian override regarding debhelper 9.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 11 Oct 2015 13:31:48 +0200
+
+ruby-sass (3.4.17-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 24 Aug 2015 12:15:26 +0200
+
+ruby-sass (3.4.16-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Add NEWS entry about deprecation of relative path on stdin.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 11 Jul 2015 23:11:06 +0200
+
+ruby-sass (3.4.14-2) unstable; urgency=medium
+
+  * Update upstream source and contact URLs.
+  * Fix fail build if manpage creation fails, and cleanup if failing.
+  * Update package relations:
+    + Relax to build-depend unversioned on gem2deb: Needed version
+      satisfied even in oldstable.
+    + Stop suggest ruby-compass.
+    + Provide virtual package sass.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 25 May 2015 16:42:51 +0200
+
+ruby-sass (3.4.14-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    + Further avoid race conditions when caching.
+    + Only emit one warning for each line that uses the deprecated form
+      of unquote().
+    + Stop parsing and emitting invalid @supports directives.
+    + Add a deprecation warning for using != to compare a number with
+      units to a number without (such warning already existed for ==).
+    + Improve rounding of the results of color operations.
+
+  [ Jonas Smedegaard ]
+  * Update copyright info:
+    + Extend coverage for mian upstream authors.
+    + Use License-Grant and License-Reference fields.
+      Thanks to Ben Finney.
+  * Add lintian override regarding license in License-Reference field.
+    See bug#786450.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 24 May 2015 17:17:03 +0200
+
+ruby-sass (3.4.13-2) unstable; urgency=medium
+
+  * Update copyright info: Extend coverage for myself.
+  * Modernize git-buildpackage config: Drop "git-" prefix.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Wed, 13 May 2015 21:26:15 +0200
+
+ruby-sass (3.4.13-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+    + Non-string interpolation within string interpolation is now parsed
+      correctly.
+    + random() now returns the correct result if it has an integer value
+      but a float representation.
+    + Be clearer in the reference about hyphen/underscore equivalence.
+    + @keyframes rules are now converted from CSS properly.
+    + Extending a selector that contains a non-final pseudo-class no
+      longer crashes.
+    + When @extending, only a single :root element will be retained.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Fri, 27 Feb 2015 11:19:23 +0100
+
+ruby-sass (3.4.11-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 02 Feb 2015 13:12:23 +0100
+
+ruby-sass (3.4.10-2) experimental; urgency=medium
+
+  * Update package relations:
+    + Break ruby-sass-rails << 5 which (according to note in Susy) is
+      incompatible.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Fri, 30 Jan 2015 17:44:08 +0100
+
+ruby-sass (3.4.10-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+ -- Jonas Smedegaard <dr@jones.dk>  Fri, 23 Jan 2015 14:08:44 +0100
+
+ruby-sass (3.4.8-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 23 Nov 2014 01:02:51 +0100
+
+ruby-sass (3.4.6-2) unstable; urgency=medium
+
+  * Release to unstable.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 23 Oct 2014 01:22:27 +0200
+
+ruby-sass (3.4.6-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Update Vcs-Browser URL to use cgit web frontend.
+  * Declare compliance with Debian Policy 3.9.6.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 23 Oct 2014 00:43:28 +0200
+
+ruby-sass (3.4.0-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+
+  [ Jonas Smedegaard ]
+  * Improve description in man pages.
+  * Unfuzz patches.
+  * Update copyright info:
+    + Extend coverage for main authors.
+    + Use new name for one of the authors.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 21 Aug 2014 13:49:32 +0200
+
+ruby-sass (3.3.9-2) experimental; urgency=medium
+
+  * Rewrite patch 1002 to not hardcode full paths.
+  * Fix include auto-generated man pages.
+    Build-depend on help2man.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 07 Jul 2014 15:21:56 +0200
+
+ruby-sass (3.3.9-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release(s).
+    + Properly set the default Sass::Plugin options in Rails 3.0.
+    + Fix a few cases where source ranges were being computed
+      incorrectly for SassScript expressions.
+    + When a use of @at-root doesn't add any new rules, it will no
+      longer split its containing block in two.
+    + Fix a sass-convert bug where rules would occasionally be folded
+      together incorrectly when converting from CSS to Sass.
+    + Fix error messages for dynamically-generated @media queries with
+      empty queries.
+    + Defining a function named "and", "or", or "not" is now an error at
+      definition-time. This isn't considered a backwards-incompatible
+      change because although these functions could be defined
+      previously, they could never be successfully invoked.
+    + Fix deprecation warnings for using File.exists? on recent Ruby
+      versions.
+    + Fix a bug where @extend within @at-root could crash the compiler.
+    + Gracefully handle the inability to change cache files'
+      permissions.
+
+  [ Jonas Smedegaard ]
+  * Fix use canonical Vcs-Git URL.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 07 Jul 2014 01:15:40 +0200
+
+ruby-sass (3.3.6-1) experimental; urgency=medium
+
+  [ upstream ]
+  * New release.
+
+  [ Jonas Smedegaard ]
+  * Set experimental branches in git-buildpackage config.
+  * Relax watch file to include all regularly numbered releases.
+  * Extend coverage for myself.
+  * Update package relations:
+    + Breaks older ruby-compass.
+  * Add NEWS entry about backwards incompatible changes since 3.3.0.
+  * Update and unfuzz patches.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 01 May 2014 19:55:48 +0200
+
+ruby-sass (3.3.4+really.3.2.19-3) unstable; urgency=medium
+
+  * Fix use canonical Vcs-Git URL.
+  * Rewrite patch 1002 to not hardcode full paths.
+  * Fix include auto-generated man pages.
+    Build-depend on help2man.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 07 Jul 2014 15:29:46 +0200
+
+ruby-sass (3.3.4+really.3.2.19-2) unstable; urgency=medium
+
+  * Update Maintainer, Uploaders and Vcs-* fields: Packaging git moved
+    to pkg-sass area of Alioth.
+  * Fix watch file version mangling.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 01 May 2014 13:40:54 +0200
+
+ruby-sass (3.3.4+really.3.2.19-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+    Highlights since 3.2.12:
+    + Numbers returned by user-defined functions now trigger division,
+      just like numbers stored in variables.
+    + Support importing files in paths with open brackets.
+    + Fix `sass-convert`'s handling of rules with empty bodies when
+      converting from CSS.
+    + Fix CSS imports using `url()` with a quoted string and media
+      queries.
+    + Don't crash when parsing a directive with no name in the indented
+      syntax.
+    + Clean up file paths when importing to avoid errors for overlong
+      path names.
+    + Parse calls to functions named `true`, `false`, and `null` as
+      function calls.
+    + Don't move CSS `@import`s to the top of the file unless it's
+      necessary.
+    + Support `&.foo` when the parent selector has a newline followed by
+      a comma.
+    + Handle a race condition in the filesystem cache store when a cache
+      entry becomes invalidated.
+    + Ensure that atomic writes are fully flushed to disk.
+    + Ensure that atomic writes have the same permissions as a normal
+      open() would.
+
+  [ Jonas Smedegaard ]
+  * Revert to stable 3.2.x series (3.3.x not yet supported by Compass).
+    Closes: bug#744943. Thanks to Christian Neumann <c@2foo.net>.
+  * Fix install upstream changelog.
+  * Track only stable releases:
+    + Limit watch file to upstream 3.2.* version.
+    + Have watch file and CDBS tarball rules strip leading ...really in
+      Debian versions.
+  * Drop NEWS entry related to 3.3.0 release: reverted.
+  * Unfuzz (and revert DEP3 header of) patches.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 24 Apr 2014 13:26:29 +0200
+
+ruby-sass (3.3.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+
+  [ Jonas Smedegaard ]
+  * Update and unfuzz patches.
+  * Fix install upstream changelog.
+  * Add NEWS entry about backwards incompatible changes since 3.3.0.
+  * Recommend ruby-listen.
+  * Bump to Standards-Version to Policy 3.9.5.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 05 Apr 2014 16:36:54 +0200
+
+ruby-sass (3.2.12-1) unstable; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Add a couple missing require, fixing some load errors, especially
+      when using the command-line interface.
+    + Tune up some heuristics for eliminating redundant generated
+      selectors. This will prevent some selector elimination in cases
+      where multi-layered @extend is being used and where it seems
+      intuitively like selectors shouldn't be eliminated.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 07 Oct 2013 20:49:17 +0200
+
+ruby-sass (3.2.11-1) unstable; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Fix @extend semantics with respect to pseudo-elements. They are no
+      longer treated identically to pseudo-classes.
+    + A more understandable error is now provided when the -E option is
+     passed to the Sass command line in ruby 1.8.
+    + Fix a bug in the output of lists containing unary plus or minus
+      operations during sass <=> scss conversion.
+    + Avoid the IE7 content: counter bug with content: counters as well.
+    + Fix some thread-safety issues.
+
+  [ Jonas Smedegaard ]
+  * Unfuzz patch 1001.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 29 Sep 2013 10:30:58 +0200
+
+ruby-sass (3.2.10-1) unstable; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Use the Sass logger infrastructure for @debug directives.
+    + When printing a Sass error into a CSS comment, escape */ so the
+      comment doesn't end prematurely.
+    + Preserve the ! in /*! ... */ style comments.
+    + Fix a bug where selectors were being incorrectly trimmed when
+      using @extend.
+    + Fix a bug where sass --unix-newlines and sass-convert --in-place
+      are not working on Windows.
+
+  [ Jonas Smedegaard ]
+  * Unfuzz patches.
+  * Extend copyright coverage for upstream authors to include recent
+    years.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 01 Aug 2013 11:04:45 +0200
+
+ruby-sass (3.2.9-1) unstable; urgency=low
+
+  [ upstream ]
+  * New release.
+
+    + Fix a bug where @extend's would occasionally cause a selector to
+      be generated with the incorrect specificity.
+    + Avoid loading listen v1.0, even if it's installed as a Gem.
+    + Update the bundled version of listen to 0.7.3.
+    + Automatically avoid the IE7 "content: counter" bug.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 13 May 2013 00:47:19 +0200
+
+ruby-sass (3.2.8-1) unstable; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Fix some edge cases where redundant selectors were emitted when
+      using @extend.
+    + Fix a bug where comma-separated lists with interpolation could
+      lose elements.
+    + Fix a bug in sass-convert where lists being passed as arguments to
+      functions or mixins would lose their surrounding parentheses.
+    + Fix a bug in sass-convert where null wasn't being converted
+      correctly.
+    + Fix a bug where multiple spaces in a string literal would
+      sometimes be folded together.
+    + sass and sass-convert won't create an empty file before writing to
+      it.
+      This fixes a flash of unstyled content when using LiveReload and
+      similar tools.
+    + Fix a case where a corrupted cache could produce fatal errors on
+      some versions of Ruby.
+    + Fix a case where a mixin loop error would be incorrectly reported
+      when using @content.
+
+  [ Jonas Smedegaard ]
+  * Add README.source emphasizing control.in file as *not* a
+    show-stopper for contributions, referring to wiki page for details.
+  * Stop track md5sum of upstream tarball.
+  * Use anonscm.debian.org URL for Vcs-Git.
+  * Bump packaging license to GPL-3+, and extend coverage to include
+    recent years.
+  * Drop obsolete breaks/replaces against libhaml-ruby.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 06 May 2013 18:48:58 +0200
+
+ruby-sass (3.2.7-1) experimental; urgency=low
+
+  [ upstream ]
+  * New release.
+    + The index and zip functions now work like all other list functions
+      and treat individual values as single-element lists.
+    + Avoid stack overflow errors caused by very long function or mixin
+      argument lists.
+    + Emit relative paths when using the --line-comments flag of the
+      sass executable.
+    + Fix a case where very long numbers would cause the SCSS parser to
+      take exponential time.
+
+  [ Jonas Smedegaard ]
+  * Unfuzz patches.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 09 Mar 2013 23:31:28 +0100
+
+ruby-sass (3.2.6-1) experimental; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Support for Rubinius 2.0.0.rc1.
+    + Support for JRuby 1.7.2.
+    + Support for bubbling `@supports` queries in the indented syntax.
+    + Fix an incorrect warning when using `@extend` from within nested
+      `@media` queries.
+
+  [ Jonas Smedegaard ]
+  * Update patch 1003.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 24 Feb 2013 15:24:07 +0100
+
+ruby-sass (3.2.5-1) experimental; urgency=low
+
+  [ upstream ]
+  * New release.
+    + Fix a bug where bogus `@extend` warnings were being generated.
+    + Fix an `@import` bug on Windows.
+    + Ruby 2.0.0-preview compatibility.
+    + Fix incorrect line numbering when using DOS line endings with the
+      indented syntax.
+
+  [ Jonas Smedegaard ]
+  * Have git-import-orig suppress .gitignore files.
+  * Bump standards-version to 3.9.4.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 17 Feb 2013 14:17:02 +0100
+
+ruby-sass (3.2.4-1) experimental; urgency=low
+
+  [ upstream ]
+  * New upstream release.
+    + Fix imports from `.jar` files in JRuby.
+    + Allow comments within `@import` statements in SCSS.
+    + Fix a parsing performance bug where long decimals would
+      occasionally take many minutes to parse.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 25 Dec 2012 19:11:47 +0100
+
+ruby-sass (3.2.3-1) experimental; urgency=low
+
+  [ upstream ]
+  * New upstream release.
+    + sass --watch no longer crashs when a file in a watched directory
+      is deleted.
+    + Allow @extend within bubbling nodes such as @media.
+    + Fix various JRuby incompatibilities and test failures.
+    + Work around a performance bug that arises from using @extend with
+      deeply-nested selectors.
+
+  [ Jonas Smedegaard ]
+  * Update watch and rules files to use new github.com URL.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 29 Nov 2012 03:00:52 +0100
+
+ruby-sass (3.2.2-1) experimental; urgency=low
+
+  * New upstream release.
+    + Add a --poll option to force sass --watch to use the polling
+      backend to Listen.
+    + Fix some error reporting bugs related to @import.
+    + Treat protocol-relative URLs in @import's as static URLs, just
+      like http and https URLs.
+    + Improve the error message for misplaced simple selectors.
+    + Fix an option-handling bug that was causing errors with the
+      Compass URL helpers.
+    + Fix a performance issue with @import that only appears when
+      ActiveSupport is loaded.
+    + Fix flushing of actions to stdout.
+    + Fix the documentation for the max() function.
+    + Fix a @media parsing bug.
+
+  [ Jonas Smedegaard ]
+  * Tidy rules file.
+  * Build-depend on devscripts to always do copyright check.
+  * Bump debhelper compatibility level to 8.
+  * Update copyright file:
+    + Fix use comment pseudo-section to obey silly restrictions of
+      copyright format 1.0.
+  * Refresh patch 1001.
+  * Add news entry about deprecating attempts to multi-file @import.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 04 Nov 2012 16:14:49 +0100
+
+ruby-sass (3.2.1-1) experimental; urgency=low
+
+  * New upstream release.
+  * Refresh patch 1002.
+  * Update package relations:
+    + Relax to build-depend unversioned on cdbs: Needed version
+      satisfied in stable, and oldstable no longer supported.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Fri, 17 Aug 2012 04:44:43 +0200
+
+ruby-sass (3.1.19-3) unstable; urgency=low
+
+  * Directly use github.com (not githubredir.debian.net).
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 26 Jun 2012 21:01:46 +0200
+
+ruby-sass (3.1.19-2) unstable; urgency=low
+
+  * Use packaging section web (not ruby) and tidy short description:
+    Sass is more a web development tool than a ruby library.
+    ...Really, this time.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 28 May 2012 12:08:37 +0200
+
+ruby-sass (3.1.19-1) unstable; urgency=low
+
+  * New upstream release.
+    + Fix an 'uninitialized constant Sass::Exec::Sass::Util' error when
+      using the command-line tool.
+    + Allow '@extend' within directives such as '@media' as long as it
+      only extends selectors that are within the same directive.
+
+  * Use packaging section web (not ruby) and tidy short description:
+    Sass is more a web development tool than a ruby library.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 26 May 2012 12:38:01 +0200
+
+ruby-sass (3.1.18-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 13 May 2012 14:15:04 +0200
+
+ruby-sass (3.1.17-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 06 May 2012 00:36:46 +0200
+
+ruby-sass (3.1.16-1) unstable; urgency=low
+
+  * New upstream release.
+
+  * Update copyright file:
+    + Bump format to 1.0.
+    + Fix double-indent in Copyright fields as per Policy §5.6.13.
+  * Bump standards-version to 3.9.3.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 24 Apr 2012 13:04:29 -0400
+
+ruby-sass (3.1.15-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Fri, 10 Feb 2012 20:26:02 +0100
+
+ruby-sass (3.1.14-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 07 Feb 2012 13:28:13 +0100
+
+ruby-sass (3.1.12-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 20 Dec 2011 20:00:46 +0700
+
+ruby-sass (3.1.11-1) unstable; urgency=low
+
+  * New upstream release.
+  * Unfuzz patch 1001.
+  * Drop dpkg local-options hints from packaging source: now defaults.
+  * Update package relations:
+    + Relax build-dependency on cdbs (needlessly tight).
+    + Relax build-depend unversioned on debhelper (needed version
+      satisfied even in oldstable).
+
+ -- Jonas Smedegaard <dr@jones.dk>  Wed, 30 Nov 2011 15:04:23 +0700
+
+ruby-sass (3.1.7-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 08 Aug 2011 09:44:21 +0200
+
+ruby-sass (3.1.4-6) unstable; urgency=low
+
+  * Add Gunnar Wolf as uploader. Yeah!
+  * Fix linkage to system-shared Sass library.
+    Closes: bug#635258. Thanks to Antonio Ospite.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 24 Jul 2011 15:35:09 +0200
+
+ruby-sass (3.1.4-5) unstable; urgency=low
+
+  * Fix VERSION resolving.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 04 Jul 2011 02:52:54 +0200
+
+ruby-sass (3.1.4-4) unstable; urgency=low
+
+  * Really fix add breaks/replaces libhaml-ruby.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 04 Jul 2011 02:30:43 +0200
+
+ruby-sass (3.1.4-3) unstable; urgency=low
+
+  * Improve patch 1001 to suggest install ruby-compass.
+  * Fix add replaces (in addition to breaks) libhaml-ruby.
+  * Add suggests ruby-compass.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 04 Jul 2011 02:18:14 +0200
+
+ruby-sass (3.1.4-2) unstable; urgency=low
+
+  * Fix add Breaks for older libhaml-ruby* providing Sass.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 03 Jul 2011 16:42:34 +0200
+
+ruby-sass (3.1.4-1) unstable; urgency=low
+
+  * Initial release.
+    Closes: Bug#632541.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 03 Jul 2011 16:03:38 +0200

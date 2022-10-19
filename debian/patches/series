@@ -1,0 +1,5 @@
+1001-avoid-rubygems.patch
+1002-fix-VERSION-path.patch
+1003-fix-library-path.patch
+2001_avoid_gemspec_sass-listen_relation.patch
+3001-skip-some-tests.patch

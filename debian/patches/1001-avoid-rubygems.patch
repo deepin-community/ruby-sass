@@ -1,0 +1,29 @@
+From: Jonas Smedegaard <dr@jones.dk>
+Date: Sun, 3 Jul 2011 16:04:03 +0200
+Subject: Avoid rubygems
+
+---
+ lib/sass/exec/sass_scss.rb | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+
+diff --git a/lib/sass/exec/sass_scss.rb b/lib/sass/exec/sass_scss.rb
+index baea0a9..e0e3674 100644
+--- a/lib/sass/exec/sass_scss.rb
++++ b/lib/sass/exec/sass_scss.rb
+@@ -237,13 +237,9 @@ MESSAGE
+       begin
+         require 'compass'
+       rescue LoadError
+-        require 'rubygems'
+-        begin
+-          require 'compass'
+-        rescue LoadError
+-          puts "ERROR: Cannot load compass."
+-          exit 1
+-        end
++        puts "Unable to load Compass. It has been removed from Debian."
++        puts "Please install it e.g. with the following command: gem install compass"
++        exit 1
+       end
+       Compass.add_project_configuration
+       Compass.configuration.project_path ||= Dir.pwd

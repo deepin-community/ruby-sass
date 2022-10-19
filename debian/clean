@@ -1,0 +1,5 @@
+debian/sass.1
+debian/sass-convert.1
+debian/scss.1
+lib/sass/VERSION
+lib/sass/VERSION_NAME
